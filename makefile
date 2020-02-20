@@ -12,3 +12,7 @@ jeu.o : jeu.c jeu.h
 
 io.o : io.c io.h grille.h jeu.h
 	gcc -c io.c
+clean :
+	rm -f *.o && rm -f main
+dist: 
+	tar -J -cvf RashidALIEV.tar.xz *.c *.h makefile doxyfile
