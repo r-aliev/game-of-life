@@ -45,18 +45,15 @@ void debut_jeu(grille *g, grille *gc){
 			}
 			case 'n':
 			{
+				libere_grille(gc);
 				char ng[255];
 				printf("Donne le nom du fichier: ");
 				scanf("%s",ng);
-				printf("\n");
 				init_grille_from_file(ng,g);
 				//printf("BraBraBra\n");
-				libere_grille(gc);
 				//printf("BraBraBra2\n");
 				//
 				alloue_grille(g->nbl, g->nbc, gc);
-				evolue(g,gc);
-				affiche_grille(*g);
 				printf("\n");
 
 				break;
