@@ -1,5 +1,8 @@
-#include <stdio.h>
-
+/**
+ * \file
+ * fichier main
+ * \author ALIEV Rashid
+ */
 #include "grille.h"
 #include "io.h"
 #include "jeu.h"

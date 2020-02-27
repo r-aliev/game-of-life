@@ -1,5 +1,19 @@
+/**
+ * \brief pour la documentation des fonctions regarder \c jeu.h
+ *
+ * \file jeu.c 
+ * code source pour les grilles, contient les fonctions de manipulations
+ * \author ALIEV Rashid
+ * \copyright GNU Public License.
+ */
 #include "jeu.h"
-
+/**
+ * \param i int
+ * \param j int
+ * \param g* grille
+ * \rerturn \int nombre des voisins vivantes  
+ * \brief compte le nombre de voisins vivants de la cellule (i,j) | les bords sont cycliques.
+ */ 
 int compte_voisins_vivants (int i, int j, grille g){
 	int v = 0, l=g.nbl, c = g.nbc;
 	v+= est_vivante(modulo(i-1,l),modulo(j-1,c),g);
@@ -13,7 +27,11 @@ int compte_voisins_vivants (int i, int j, grille g){
 
 	return v; 
 }
-
+/**
+ * \param g grille*
+ * \param gc grille*
+ * \return void  fait évoluer la grille g d'un pas de temps
+ */
 void evolue (grille *g, grille *gc){
 	copie_grille (*g,*gc); // copie temporaire de la grille
 	int i,j,l=g->nbl, c = g->nbc,v;
