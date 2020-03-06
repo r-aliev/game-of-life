@@ -59,7 +59,8 @@ void efface_grille (grille g){
  * \return void  "Debute le jeu"
  */
 void debut_jeu(grille *g, grille *gc){
-	char c = getchar(); 
+	char c = getchar();
+	int tempsDeEvolution = 0;
 	while (c != 'q') // touche 'q' pour quitter
 	{ 
 		switch (c) {
@@ -67,6 +68,7 @@ void debut_jeu(grille *g, grille *gc){
 			{ // touche "entree" pour évoluer
 				evolue(g,gc);
 				efface_grille(*g);
+				printf("\n\nTemps d'évolution du grille est %d\n\n", ++tempsDeEvolution);
 				affiche_grille(*g);
 				break;
 			}
@@ -82,6 +84,7 @@ void debut_jeu(grille *g, grille *gc){
 				//
 				alloue_grille(g->nbl, g->nbc, gc);
 				printf("\n");
+				tempsDeEvolution = 0;
 
 				break;
 			}
