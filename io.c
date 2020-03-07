@@ -61,6 +61,7 @@ void efface_grille (grille g){
 void debut_jeu(grille *g, grille *gc){
 	char c = getchar();
 	int tempsDeEvolution = 0;
+	int cyclique = 1;
 	while (c != 'q') // touche 'q' pour quitter
 	{ 
 		switch (c) {
@@ -68,7 +69,18 @@ void debut_jeu(grille *g, grille *gc){
 			{ // touche "entree" pour évoluer
 				evolue(g,gc);
 				efface_grille(*g);
-				printf("\n\nTemps d'évolution du grille est %d\n\n", ++tempsDeEvolution);
+				for(int j = 0 ; j < 1 ; j++)
+					printf("\033[A\33[2K\r");
+
+				printf("\n\nTemps d'évolution du grille est %d\n\t", ++tempsDeEvolution);
+				if(cyclique == 1 )
+				{
+					printf("cyclique\n\t");
+				}
+				else
+				{
+					printf("Non-cyclique\n\t");
+				}
 				affiche_grille(*g);
 				break;
 			}
@@ -85,8 +97,22 @@ void debut_jeu(grille *g, grille *gc){
 				alloue_grille(g->nbl, g->nbc, gc);
 				printf("\n");
 				tempsDeEvolution = 0;
-
+				getchar();
 				break;
+			}
+			case 'c':
+			{
+				if(cyclique == 1 )
+				{
+					cyclique = 0 ;
+					compte_voisins_vivants = compte_voisins_vivants_non_cyclique ;
+				}
+				else
+				{
+					cyclique = 1 ;
+					compte_voisins_vivants = compte_voisins_vivants_cyclique ;
+				}
+				break ;
 			}
 			default : 
 			{ // touche non traitée
