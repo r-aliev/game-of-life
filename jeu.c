@@ -92,9 +92,11 @@ void evolue (grille *g, grille *gc){
 			if (est_vivante(i,j,*g)) 
 			{ // evolution d'une cellule vivante
 				if ( v!=2 && v!= 3 ) set_morte(i,j,*g);
+				else pt_set_vivante(i,j, *g);
 			}
 			else 
-			{ // evolution d'une cellule morte
+			{ 	if(g->cellules[i][j]==0)
+				// evolution d'une cellule morte
 				if ( v==3 ) set_vivante(i,j,*g);
 			}
 		}

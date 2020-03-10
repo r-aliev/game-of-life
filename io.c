@@ -27,7 +27,7 @@ void affiche_trait (int c){
 void affiche_ligne (int c, int* ligne){
 	int i;
 	for (i=0; i<c; ++i) 
-		if (ligne[i] == 0 ) printf ("|   "); else printf ("| O ");
+		if (ligne[i] == 0 ) printf ("|   "); else printf ("| %d ",ligne[i]);
 	printf("|\n");
 	return;
 }
@@ -62,9 +62,36 @@ void debut_jeu(grille *g, grille *gc){
 	char c = getchar();
 	int tempsDeEvolution = 0;
 	int cyclique = 1;
+	int vieillissement = 0;
 	while (c != 'q') // touche 'q' pour quitter
 	{ 
-		switch (c) {
+		switch (c) 
+		{
+			case 'c':
+			{
+				if(cyclique == 1)
+				{
+					compte_voisins_vivants = compte_voisins_vivants_non_cyclique ;
+					cyclique = 0;
+				}else{
+					compte_voisins_vivants = compte_voisins_vivants_cyclique ;
+					cyclique=1;
+				}
+				break ;
+			}
+			case 'v':
+			{
+				if(vieillissement == 1)
+				{
+					pt_set_vivante = set_vivante;
+					vieillissement = 0;
+				}else{
+					pt_set_vivante = set_vivante_vieillissement;
+					vieillissement = 1;
+				}
+
+				break;
+			}
 			case '\n' : 
 			{ // touche "entree" pour évoluer
 				evolue(g,gc);
@@ -75,11 +102,15 @@ void debut_jeu(grille *g, grille *gc){
 				printf("\n\nTemps d'évolution du grille est %d\n\t", ++tempsDeEvolution);
 				if(cyclique == 1 )
 				{
-					printf("cyclique\n\t");
+					printf("cyclique = Activé \n\t");
+				}else{
+					printf("cyclique = Désactivé \n\t");
 				}
-				else
+				if(vieillissement == 1 )
 				{
-					printf("Non-cyclique\n\t");
+					printf("vieillissement = Activé \n\t");
+				}else{
+					printf("vieillissement = Désactivé \n\t");
 				}
 				affiche_grille(*g);
 				break;
@@ -99,20 +130,6 @@ void debut_jeu(grille *g, grille *gc){
 				tempsDeEvolution = 0;
 				getchar();
 				break;
-			}
-			case 'c':
-			{
-				if(cyclique == 1 )
-				{
-					cyclique = 0 ;
-					compte_voisins_vivants = compte_voisins_vivants_non_cyclique ;
-				}
-				else
-				{
-					cyclique = 1 ;
-					compte_voisins_vivants = compte_voisins_vivants_cyclique ;
-				}
-				break ;
 			}
 			default : 
 			{ // touche non traitée

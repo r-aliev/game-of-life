@@ -83,6 +83,26 @@ static inline void set_vivante(int i, int j, grille g){g.cellules[i][j] = 1;}
  * \post modification d'une cellule
  */ 
 static inline void set_morte(int i, int j, grille g){g.cellules[i][j] = 0;}
+
+/**
+ * \fn static inline void set_vivante_vieillisement (int i, int j, grille g)
+ * \memberof grille
+ * \param i int
+ * \param j int
+ * \param g grille
+ * \pre i et j dans la grille
+ * \brief rend vivante la cellule (i,j) de la grille g
+ *
+ * même avec la fonction set_vivante, mais avec l'option de vieillisement
+ * \return void "modifie la cellule (i,j) de la grille g"
+ * \post modification d'une cellule de la grille en paramètre
+ */ 
+static inline void set_vivante_vieillissement(int i, int j, grille g)
+{ 
+	++g.cellules[i][j] ;
+	g.cellules[i][j] %= 10 ;
+}
+
 /**
  * \fn static inline int est_vivante(int i, int j, grille g)
  * \memberof grille
@@ -93,7 +113,7 @@ static inline void set_morte(int i, int j, grille g){g.cellules[i][j] = 0;}
  * \brief test si la cellule (i,j) de la grille g est vivante ou pas
  * \return test si la cellule (i,j) de la grille g est vivante ou pas (\c int)
  */ 
-static inline int est_vivante(int i, int j, grille g){return g.cellules[i][j] == 1;}
+static inline int est_vivante(int i, int j, grille g){return g.cellules[i][j] > 0;}
 
 /**
  * \fn void copie_grille (grille gs, grille gd)
