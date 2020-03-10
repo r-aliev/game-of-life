@@ -15,4 +15,4 @@ io.o : io.c io.h grille.h jeu.h
 clean :
 	rm -f *.o && rm -f main
 dist: 
-	tar -J -cvf RashidALIEV.tar.xz *.c *.h makefile doxyfile
+	tar -J -cvf Rashid_ALIEV_v2.0.tar.xz *.c *.h makefile Doxyfile
