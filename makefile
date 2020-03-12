@@ -1,18 +1,31 @@
+CC = gcc
+CFLAGS= -Wall -g 
+
+vpath %.c src
+vpath %.h include
+vpath %.o obj
+
 main: main.o grille.o io.o jeu.o
-	gcc -o main main.o grille.o io.o jeu.o
+	mkdir -p bin
+	$(CC) $(CFLAGS) -o bin/$@ obj/main.o obj/jeu.o obj/io.o obj/grille.o
+	
+%.o: %.c
+	mkdir -p obj
+	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
-main.o : main.c grille.h io.h jeu.h
-	gcc -c main.c
+doc:
+	mkdir -p doc
+	doxygen Doxyfile
+	mv html latex doc
 
-grille.o : grille.c grille.h
-	gcc -c grille.c
-
-jeu.o : jeu.c jeu.h
-	gcc -c jeu.c
-
-io.o : io.c io.h grille.h jeu.h
-	gcc -c io.c
 clean :
 	rm -f *.o && rm -f main
+	rm -rf bin
+	rm -rf obj
+	rm -rf doc
+
+cleanArchive:
+	rm -rf *.tar.xz 
+
 dist: 
-	tar -J -cvf Rashid_ALIEV_v2.0.tar.xz *.c *.h makefile Doxyfile
+	tar -J -cvf ALIEV_Rashid_v3.0.tar.xz $(src)/*.c include/*.h makefile Doxyfile
