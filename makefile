@@ -1,28 +1,34 @@
 CC = gcc
-CFLAGS= -Wall -g 
+CFLAGS= -I$(DOSH) -Wall -g 
 
-vpath %.c src
-vpath %.h include
-vpath %.o obj
+DOSEXE = bin
+DOSC = src
+DOSH = include
+DOSO = obj
+DOSDOC = doc
+
+vpath %.c $(DOSC)
+vpath %.h $(DOSH)
+vpath %.o $(DOSO)
 
 main: main.o grille.o io.o jeu.o
-	mkdir -p bin
-	$(CC) $(CFLAGS) -o bin/$@ obj/main.o obj/jeu.o obj/io.o obj/grille.o
-	
+	mkdir -p $(DOSEXE)
+	gcc $(CFLAGS) -o $(DOSEXE)/$@ $(DOSO)/main.o $(DOSO)/jeu.o $(DOSO)/io.o $(DOSO)/grille.o
+
 %.o: %.c
-	mkdir -p obj
-	$(CC) $(CFLAGS) -o obj/$@ -c $<
+	mkdir -p $(DOSO)
+	gcc $(CFLAGS) -o $(DOSO)/$@ -c $<
 
 doc:
-	mkdir -p doc
+	mkdir -p $(DOSDOC)
 	doxygen Doxyfile
-	mv html latex doc
+	mv html latex $(DOSDOC)
 
 clean :
 	rm -f *.o && rm -f main
-	rm -rf bin
-	rm -rf obj
-	rm -rf doc
+	rm -rf $(DOSEXE)
+	rm -rf $(DOSO)
+	rm -rf $(DOSDOC)
 
 cleanArchive:
 	rm -rf *.tar.xz 
