@@ -1,5 +1,4 @@
 CC = gcc
-CFLAGS= -I$(DOSH) -Wall -g 
 
 DOSEXE = bin
 DOSC = src
@@ -7,31 +6,39 @@ DOSH = include
 DOSO = obj
 DOSDOC = doc
 
+CPPFLAGS = -I/usr/include/cairo -Iinclude
+LDFLAGS = -lcairo -lm -lX11
+ifeq ($(MODE),TEXTE)
+CFLAGS1 += -DMODE=TEXTE
+endif
+
+CFLAGS = $(CPPFLAGS) -Wall -g
+
 vpath %.c $(DOSC)
 vpath %.h $(DOSH)
 vpath %.o $(DOSO)
 
-main: main.o grille.o io.o jeu.o
+main: main.o jeu.o io.o grille.o ioCairo.o
 	mkdir -p $(DOSEXE)
-	gcc $(CFLAGS) -o $(DOSEXE)/$@ $(DOSO)/main.o $(DOSO)/jeu.o $(DOSO)/io.o $(DOSO)/grille.o
+	$(CC) -DMODE$(MODE) $(CFLAGS) -o $(DOSEXE)/$@ $(DOSO)/main.o $(DOSO)/io.o  $(DOSO)/ioCairo.o $(LDFLAGS)
 
 %.o: %.c
 	mkdir -p $(DOSO)
-	gcc $(CFLAGS) -o $(DOSO)/$@ -c $<
+	$(CC) -DMODE$(MODE) $(CFLAGS) -o $(DOSO)/$@ -c $<
 
 doc:
 	mkdir -p $(DOSDOC)
 	doxygen Doxyfile
 	mv html latex $(DOSDOC)
 
-clean :
-	rm -f *.o && rm -f main
-	rm -rf $(DOSEXE)
+clean:
 	rm -rf $(DOSO)
+	rm -rf $(DOSEXE)
 	rm -rf $(DOSDOC)
 
 cleanArchive:
-	rm -rf *.tar.xz 
+	rm -rf *.tar.xz
 
-dist: 
-	tar -J -cvf ALIEV_Rashid_v3.0.tar.xz $(src)/*.c include/*.h makefile Doxyfile
+dist:
+	mkdir -p dist
+	tar -J -cvf ALIEV_Rashid_v4.0.tar.xz grilles makefile Doxyfile README.md include src
