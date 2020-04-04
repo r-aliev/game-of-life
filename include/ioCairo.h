@@ -1,3 +1,12 @@
+/**
+ * \brief Déclarations des fonctions de ioCairo.c
+ *
+ * \file ioCairo.h 
+ * headers pour ioCairo.c
+ * \author Rashid ALIEV
+ * \copyright GNU Public License.
+ */
+
 #ifndef __IOCAIRO_H__
 #define __IOCAIRO_H__
 #include <stdio.h>

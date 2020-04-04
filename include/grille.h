@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <assert.h>
 
+
 /**
  * \typedef  \c grille;
  * Déclaration de la structure de grille
@@ -127,5 +128,7 @@ static inline int est_vivante(int i, int j, grille g){return g.cellules[i][j] > 
  * \post la grille gd est modifié
  */
 void copie_grille (grille gs, grille gd);
+
+
 
 #endif

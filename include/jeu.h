@@ -86,5 +86,8 @@ int (*compte_voisins_vivants) (int, int, grille)  ;
  */
 void (*pt_set_vivante) (int, int, grille);
 
+int oscillant(grille g);
+int grille_vide(grille *g);
+int grilles_egales(grille *g1 , grille *g2);
 
 #endif

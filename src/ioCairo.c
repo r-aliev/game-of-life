@@ -1,3 +1,12 @@
+/**
+ * \brief pour la documentation des fonctions regarder \c ioCairo.h
+ *
+ * \file ioCairo.c
+ * code source pour les entrées et sorties de mode graphique Cairo
+ * \author ALIEV Rashid
+ * \copyright GNU Public License.
+ */
+
 #include "ioCairo.h"
 
 void affiche_grille_cairo(cairo_surface_t* surface, grille g)
@@ -58,8 +67,6 @@ void debut_jeu_cairo(grille *g, grille *gc)
 	int scr;
 	int q = 0, v=0, i=0, c=1;
 	char str[12];
-	//KeySym key ;
-	//char keybuf[8] ;
 	
 	// init the display
 	if(!(dpy=XOpenDisplay(NULL))) {
@@ -144,11 +151,53 @@ void debut_jeu_cairo(grille *g, grille *gc)
 						else pt_set_vivante = set_vivante;
 						break;
 					}
-					case 38: //touche q
+					case 81: //touche q
 					{
 						q = 1;
 						break;
 					}
+					case 32:
+					{//o
+						int o = oscillant(*g) ;
+						cairo_t *cr = cairo_create(cs);
+
+						cairo_select_font_face(cr, "Arial",
+							CAIRO_FONT_SLANT_NORMAL,
+							CAIRO_FONT_WEIGHT_BOLD);
+						cairo_set_font_size(cr, 15);						
+						cairo_set_source_rgb (cr, 1, 1, 1);
+    					cairo_move_to (cr, MARGX, MARGY-50);
+						switch(o)
+						{
+							case 0:
+							{
+								cairo_show_text (cr, "Non Oscillante.");
+								break;
+							}
+							case -1:
+							{
+								cairo_show_text (cr, "Grille est Vide.");
+								break;
+							}
+							case 1:
+							{
+								cairo_show_text(cr, "Grille est Statique.");
+								break;
+							}
+							default:
+							{
+								cairo_show_text (cr, "Periode = ");
+    							sprintf(str, "%d", o);
+								cairo_show_text (cr, str);
+								break;
+							}
+						}
+						XNextEvent(dpy, &e);
+						XNextEvent(dpy, &e);
+						cairo_destroy(cr);
+						break ;
+					}
+
 				}
 
 			}else if(e.type == ButtonPress){

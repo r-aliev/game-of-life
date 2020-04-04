@@ -103,3 +103,58 @@ void evolue (grille *g, grille *gc){
 	}
 	return;
 }
+
+int grilles_egales(grille *g1 , grille *g2)
+{
+	int i, j;
+	for (i = 0; i<g1->nbl; i++) 
+	{
+		for (j = 0; j<g1->nbc; j++) 
+		{
+			if (g1->cellules[i][j] != g2->cellules[i][j])
+			{
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+
+int grille_vide(grille *g)
+{
+	int i, j;
+	for (i = 0; i < g->nbl; i++) {
+		for (j = 0; j < g->nbc; j++) {
+			if (est_vivante(i, j, *g)) {
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+
+
+int oscillant(grille g)
+{
+	int result = 0 ;
+	int j = 1 ;
+	grille gc1,gc2 ;
+	alloue_grille(g.nbl,g.nbc,&gc1) ;
+	copie_grille(g,gc1);
+	alloue_grille(g.nbl,g.nbc,&gc2) ;
+	while(j <= 1000 && result == 0)
+	{
+		evolue(&gc1,&gc2) ;
+		if(grilles_egales(&g,&gc1) == 1) 
+			result = j ;
+		j++ ;
+	}
+	if(grille_vide(&g) == 1) 
+		result = -1 ;
+
+	libere_grille(&gc1);
+	libere_grille(&gc2);
+	
+	return result ;
+}
+
