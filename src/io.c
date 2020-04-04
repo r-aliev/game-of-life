@@ -137,7 +137,7 @@ void debut_jeu(grille *g, grille *gc){
 				alloue_grille(g->nbl, g->nbc, gc);
 				printf("\n");
 				tempsDeEvolution = 0;
-				getchar();
+				//getchar();
 				break;
 			}
 			default : 
