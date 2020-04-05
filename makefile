@@ -47,5 +47,4 @@ cleanArchive:
 	rm -rf *.tar.xz
 
 dist:
-	mkdir -p dist
 	tar -J -cvf ALIEV_Rashid_v5.0.tar.xz makefile Doxyfile README.md include src

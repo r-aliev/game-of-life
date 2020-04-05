@@ -1,8 +1,8 @@
-#Projet : Jeu de la Vie
+# Projet : Jeu de la Vie
 
 Implémentation en C du jeu de la vie, l'automate cellulaire de John Conway.
 
-## description
+## Description
 
 **Le Jeu de la Vie (ou Game of Life)** est, en réalité, un automate cellulaire défini en 1970
 par le mathématicien anglais **John Conway** afin de tenter de résoudre un problème soulevé par un
@@ -19,3 +19,19 @@ cellules vivantes dans son voisinage.
 ou 3 cellules vivantes dans son voisinage, sinon elle meurt.
   * Le voisinage utilisé est le 8-voisinage : pour une cellule donnée, ses voisines sont les 8 cellules
 qui l’entourent
+
+Structure des fichiers
+----------------------
+
+- / racine
+    - include/ contient toutes les en-têtes de fonctions et structures du programme (*.h)
+	- src/ contient toutes les sources (*.c)
+	- lib/ contient les librairies (*.a)
+	- grilles/ contient l'ensemble des grilles disponibles
+
+### Version
+- v5.0 : Niveau 5 terminé
+- v4.0 : Niveau 4 terminé 
+- v3.0 : Niveau 3 terminé
+- v2.0 : Niveau  2 terminé
+- v1.0 : Niveau  1 terminé
