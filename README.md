@@ -22,8 +22,7 @@ qui l’entourent
 
 Structure des fichiers
 ----------------------
-
-- / racine
+- /
     - include/ contient toutes les en-têtes de fonctions et structures du programme (*.h)
 	- src/ contient toutes les sources (*.c)
 	- lib/ contient les librairies (*.a)
