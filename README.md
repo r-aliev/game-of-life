@@ -1,6 +1,7 @@
 # Projet : Jeu de la Vie
 
-Implémentation en C du jeu de la vie, l'automate cellulaire de John Conway.
+Implémentation en C du jeu de la vie, l'automate cellulaire de John Conway. 
+
 
 ## Description
 
@@ -22,15 +23,66 @@ qui l’entourent
 
 Structure des fichiers
 ----------------------
-- /
-    - include/ contient toutes les en-têtes de fonctions et structures du programme (*.h)
+- / racine
+	- include/ contient toutes les en-têtes de fonctions et structures du programme (*.h)
 	- src/ contient toutes les sources (*.c)
-	- lib/ contient les librairies (*.a)
 	- grilles/ contient l'ensemble des grilles disponibles
+
+Commandes importantes
+---------------------
+
+### Compiler le programme
+
+~~~{.sh}
+make
+~~~
+Le fichier exécutable se trouve au chemin suivant : /bin/main
+Par défaut, le programme est compilé en mode graphique (Cairo et X requis).
+
+Pour compiler en mode texte :
+~~~{.sh}
+make MODE=TEXTE
+~~~
+
+**ATTENTION :** Il est impératif de nettoyer les artefacts de compilation en passant du mode textuel au mode graphique et vice versa.
+
+
+### Exécuter le programme
+
+~~~{.sh}
+./bin/main grilles/grilleX.txt
+~~~
+
+Les grilles se trouvent dans le répertoire /grilles/ et ont comme nom de fichier "grilleX.txt", X indiquant le numéro de la grille.
+
+Exemple :
+~~~{.sh}
+./bin/main grilles/grille4.txt
+~~~
+
+### Générer la documentation (Doxygen)
+
+~~~{.sh}
+make doc
+~~~
+Il suffit ensuite d'ouvrir le fichier doc/html/index.html pour accéder à l'intégralité de la documentation
+
+### Générer une archive du programme
+
+~~~{.sh}
+make dist
+~~~
+L'archive sera crée dans le répertoire /dist
+
+### Nettoyer les artefacts de compilation
+
+~~~{.sh}
+make clean
+~~~
 
 ### Version
 - v5.0 : Niveau 5 terminé
-- v4.0 : Niveau 4 terminé 
+- v4.0 : Niveau 4 terminé (GUI)
 - v3.0 : Niveau 3 terminé
 - v2.0 : Niveau  2 terminé
 - v1.0 : Niveau  1 terminé
